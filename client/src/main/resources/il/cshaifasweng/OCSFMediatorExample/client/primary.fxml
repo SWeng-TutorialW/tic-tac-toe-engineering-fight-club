@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.PrimaryController">
    <children>
-      <Label text="Welcome" />
-      <Button mnemonicParsing="false" onAction="#sendWarning" text="Send me a warning!" />
+      <GridPane gridLinesVisible="true" layoutX="166.0" layoutY="39.0" prefHeight="176.0" prefWidth="268.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="BtnCell00" mnemonicParsing="false" onAction="#pressCell00" prefHeight="74.0" prefWidth="100.0" />
+            <Button fx:id="BtnCell10" mnemonicParsing="false" onAction="#pressCell10" prefHeight="94.0" prefWidth="119.0" GridPane.columnIndex="1" />
+            <Button fx:id="BtnCell20" mnemonicParsing="false" onAction="#pressCell20" prefHeight="77.0" prefWidth="103.0" GridPane.columnIndex="2" />
+            <Button fx:id="BtnCell01" mnemonicParsing="false" onAction="#pressCell01" prefHeight="117.0" prefWidth="130.0" GridPane.rowIndex="1" />
+            <Button fx:id="BtnCell11" mnemonicParsing="false" onAction="#pressCell11" prefHeight="104.0" prefWidth="143.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="BtnCell21" mnemonicParsing="false" onAction="#pressCell21" prefHeight="82.0" prefWidth="103.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="BtnCell12" mnemonicParsing="false" onAction="#pressCell12" prefHeight="78.0" prefWidth="104.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="BtnCell02" mnemonicParsing="false" onAction="#pressCell02" prefHeight="82.0" prefWidth="121.0" GridPane.rowIndex="2" />
+            <Button fx:id="BtnCell22" mnemonicParsing="false" onAction="#pressCell22" prefHeight="115.0" prefWidth="118.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Label fx:id="HeaderLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="153.0" layoutY="4.0" prefHeight="20.0" prefWidth="290.0" text="Tic Tac Toe Game" textAlignment="CENTER" textFill="#6e0505" textOverrun="CENTER_ELLIPSIS" underline="true">
+         <font>
+            <Font name="Bauhaus 93" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="startBtn" layoutX="226.0" layoutY="259.0" mnemonicParsing="false" onAction="#pressStartBtn" text="Start game" />
+      <Button fx:id="restartBtn" layoutX="318.0" layoutY="259.0" mnemonicParsing="false" onAction="#pressRestartBtn" prefHeight="26.0" prefWidth="90.0" text="Restart Game" />
    </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+</AnchorPane>

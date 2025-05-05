@@ -8,4 +8,5 @@
   <groupId>il.cshaifasweng.OCSFMediatorExample</groupId>
   <artifactId>entities</artifactId>
   <packaging>jar</packaging>
+
 </project>
