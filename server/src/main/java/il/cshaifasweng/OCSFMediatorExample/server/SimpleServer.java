@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.GameMove;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
@@ -19,36 +20,17 @@ public class SimpleServer extends AbstractServer {
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		String msgString = msg.toString();
-		if (msgString.startsWith("#warning")) {
-			Warning warning = new Warning("Warning from server!");
+		if (msg instanceof GameMove move) {
+			System.out.println("Received move: " + move);
+
 			try {
-				client.sendToClient(warning);
-				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
-			} catch (IOException e) {
+				sendToAllClients(move);  // 📢 Broadcast the move
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		else if(msgString.startsWith("add client")){
-			SubscribedClient connection = new SubscribedClient(client);
-			SubscribersList.add(connection);
-			try {
-				client.sendToClient("client added successfully");
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		else if(msgString.startsWith("remove client")){
-			if(!SubscribersList.isEmpty()){
-				for(SubscribedClient subscribedClient: SubscribersList){
-					if(subscribedClient.getClient().equals(client)){
-						SubscribersList.remove(subscribedClient);
-						break;
-					}
-				}
-			}
-		}
 	}
+
 	public void sendToAllClients(String message) {
 		try {
 			for (SubscribedClient subscribedClient : SubscribersList) {

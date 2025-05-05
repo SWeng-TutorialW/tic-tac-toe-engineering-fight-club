@@ -12,6 +12,10 @@
 	<artifactId>client</artifactId>
 	<dependencies>
 		<dependency>
+			<groupId>il.cshaifasweng.OCSFMediatorExample</groupId>
+			<artifactId>entities</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-base</artifactId>
 			<version>21.0.1</version>
@@ -36,10 +40,6 @@
 			<groupId>org.greenrobot</groupId>
 			<artifactId>eventbus</artifactId>
 			<version>3.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>${groupId}</groupId>
-			<artifactId>entities</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
