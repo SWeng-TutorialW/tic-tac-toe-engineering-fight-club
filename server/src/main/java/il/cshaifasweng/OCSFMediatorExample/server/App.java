@@ -12,7 +12,7 @@ public class App
 	private static SimpleServer server;
     public static void main( String[] args ) throws IOException
     {
-        System.out.println("✅ Server started and listening for connections...");
+        System.out.println("Server started and listening for connections...");
         server = new SimpleServer(3025);
         server.listen();
     }
