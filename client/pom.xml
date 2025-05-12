@@ -10,6 +10,10 @@
 	</parent>
 	<groupId>il.cshaifasweng.OCSFMediatorExample</groupId>
 	<artifactId>client</artifactId>
+	<properties>
+		<maven.compiler.release>23</maven.compiler.release>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>il.cshaifasweng.OCSFMediatorExample</groupId>
@@ -17,25 +21,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-base</artifactId>
-			<version>21.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
 			<version>21.0.1</version>
+			<classifier>win</classifier> <!-- keep if only running on Windows -->
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
 			<version>21.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-graphics</artifactId>
-			<version>21.0.1</version>
 			<classifier>win</classifier>
 		</dependency>
+
 		<dependency>
 			<groupId>org.greenrobot</groupId>
 			<artifactId>eventbus</artifactId>
@@ -65,9 +61,10 @@
 						<configuration>
 							<transformers>
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>il.cshaifasweng.OCSFMediatorExample.client.Main</mainClass>
+									<mainClass>il.cshaifasweng.OCSFMediatorExample.client.Launcher</mainClass>
 								</transformer>
 							</transformers>
+
 						</configuration>
 					</execution>
 				</executions>
