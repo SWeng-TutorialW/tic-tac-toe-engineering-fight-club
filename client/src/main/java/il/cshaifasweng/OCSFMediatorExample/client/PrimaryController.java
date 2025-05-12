@@ -69,6 +69,9 @@ public class PrimaryController {
     private Button startBtn; // Value injected by FXMLLoader
 
     @FXML
+    private Label PlayerNum;
+
+    @FXML
     void pressCell00(ActionEvent event) {
         handleCellPress(BtnCell00, 0, 0);
     }
@@ -114,8 +117,7 @@ public class PrimaryController {
         handleCellPress(BtnCell22, 2, 2);
     }
 
-    @FXML
-    void pressRestartBtn(ActionEvent event) {
+    private void resetBoard() {
         BtnCell00.setText("");
         BtnCell01.setText("");
         BtnCell02.setText("");
@@ -132,8 +134,18 @@ public class PrimaryController {
 
         gameStarted = false;
         HeaderLabel.setText("Game reset. Press Start to play.");
+        PlayerNum.setText("");
     }
 
+
+    @FXML
+    void pressRestartBtn(ActionEvent event) {
+        resetBoard();
+    }
+
+    public static PrimaryController getInstance() {
+        return instance;
+    }
 
 
     private void handleCellPress(Button cell, int row, int col) {
@@ -157,33 +169,37 @@ public class PrimaryController {
     }
 
 
+    private boolean boardHasMoves() {
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                if (board[i][j] != null && !board[i][j].isEmpty())
+                    return true;
+        return false;
+    }
+
+    public void setMySymbol(String symbol) {
+        this.mySymbol = symbol;
+        this.currentPlayer = "X"; // Always X starts first
+        this.gameStarted = true;
+        PlayerNum.setText("You are player: " + mySymbol);
+        HeaderLabel.setText("Game started. " + currentPlayer + "'s turn.");
+    }
 
     @FXML
     void pressStartBtn(ActionEvent event) {
+        if (boardHasMoves()) {
+            resetBoard();
+        }
         try {
             client = new SimpleClient("localhost", 3025); // or use IP if needed
         } catch (Exception e) {
             HeaderLabel.setText("Could not connect to server.");
             e.printStackTrace();
+
             return;
         }
 
-        Random random = new Random();
-
-        if (random.nextBoolean()) {
-            playerX = "Player 1";
-            playerO = "Player 2";
-            currentPlayer = "X";
-            mySymbol = "X";  // This client is X
-        } else {
-            playerX = "Player 2";
-            playerO = "Player 1";
-            currentPlayer = "O";
-            mySymbol = "O";  // This client is O
-        }
-
-        gameStarted = true;
-        HeaderLabel.setText(playerX + " is X, " + playerO + " is O. " + currentPlayer + "'s turn.");
+        HeaderLabel.setText("Waiting for role assignment from server...");
     }
 
 
