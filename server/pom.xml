@@ -24,8 +24,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>${groupId}</groupId>
+			<groupId>il.cshaifasweng.OCSFMediatorExample</groupId>
 			<artifactId>entities</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
