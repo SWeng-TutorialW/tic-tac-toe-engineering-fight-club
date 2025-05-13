@@ -70,6 +70,21 @@ public class SimpleServer extends AbstractServer {
 		}
 	}
 
+	@Override
+	protected synchronized void clientDisconnected(ConnectionToClient client) {
+		pendingClients.remove(client);
+		System.out.println("Client disconnected.");
+
+		if (pendingClients.isEmpty()) {
+			System.out.println("All clients disconnected. Closing server...");
+			try {
+				close(); // This shuts down the server
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 
 	public void sendToAllClients(String message) {
 		try {
