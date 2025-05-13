@@ -6,12 +6,15 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.net.URL;
 import il.cshaifasweng.OCSFMediatorExample.entities.GameMove;
+
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 
 public class PrimaryController {
@@ -154,7 +157,6 @@ public class PrimaryController {
             return;
         }
 
-        // Already filled cell
         if (!cell.getText().isEmpty()) return;
 
         // Check if it's the player's turn
@@ -190,17 +192,32 @@ public class PrimaryController {
         if (boardHasMoves()) {
             resetBoard();
         }
-        try {
-            client = new SimpleClient("localhost", 3025); // or use IP if needed
-        } catch (Exception e) {
-            HeaderLabel.setText("Could not connect to server.");
-            e.printStackTrace();
 
+        // Create a text input dialog to ask for the server IP
+        TextInputDialog dialog = new TextInputDialog("localhost"); // Default to localhost
+        dialog.setTitle("Connect to Server");
+        dialog.setHeaderText("Enter Server IP Address");
+        dialog.setContentText("IP:");
+
+        Optional<String> result = dialog.showAndWait();
+        if (result.isEmpty()) {
+            HeaderLabel.setText("Connection canceled.");
+            return;
+        }
+
+        String serverIP = result.get().trim();
+
+        try {
+            client = new SimpleClient(serverIP, 3025);  // Use the entered IP address
+        } catch (Exception e) {
+            HeaderLabel.setText("Could not connect to server at " + serverIP);
+            e.printStackTrace();
             return;
         }
 
         HeaderLabel.setText("Waiting for role assignment from server...");
     }
+
 
 
     private Button getButtonByCoordinates(int row, int col) {
